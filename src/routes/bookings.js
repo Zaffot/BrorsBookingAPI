@@ -44,7 +44,7 @@ function validateTimes(res, startTime, endTime) {
   }
 
   const now = new Date();
-  if (startDate < now || endDate < now) {
+  if (startDate < now) {
     sendError(res, 400, "Varaus ei saa sijoittua menneisyyteen.");
     return null;
   }
