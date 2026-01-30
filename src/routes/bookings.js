@@ -30,6 +30,17 @@ function validateTimes(res, startTime, endTime) {
     return null;
   }
 
+  // Accept only:
+  // - YYYY-MM-DDTHH:mm:ssZ
+  // - YYYY-MM-DDTHH:mm:ss.sssZ
+  const iso8601Regex =
+    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?Z$/;
+
+  if (!iso8601Regex.test(startTime) || !iso8601Regex.test(endTime)) {
+    sendError(res, 400, "Aikamuoto virheellinen. Käytä ISO 8601 -muotoa.");
+    return null;
+  }
+
   const startDate = new Date(startTime);
   const endDate = new Date(endTime);
 
@@ -51,6 +62,7 @@ function validateTimes(res, startTime, endTime) {
 
   return { startDate, endDate };
 }
+
 
 /**
  * Helper: overlap check
