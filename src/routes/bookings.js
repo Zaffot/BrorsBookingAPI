@@ -24,7 +24,7 @@ function sendError(res, statusCode, message) {
  * Helper: parse and validate times + business rules
  * Returns { startDate, endDate } on success, otherwise sends 400 and returns null.
  */
-function validateTimes(req, res, startTime, endTime) {
+function validateTimes(res, startTime, endTime) {
   if (typeof startTime !== "string" || typeof endTime !== "string") {
     sendError(res, 400, "startTime ja endTime pitää olla ISO 8601 -merkkijonoja.");
     return null;
@@ -84,7 +84,7 @@ router.post("/", (req, res) => {
     return sendError(res, 400, "roomId on pakollinen ja sen täytyy olla yksi: huone1..huone5.");
   }
 
-  const validated = validateTimes(req, res, startTime, endTime);
+  const validated = validateTimes(res, startTime, endTime);
   if (!validated) return; // validateTimes already responded with 400
 
   const { startDate, endDate } = validated;
