@@ -26,7 +26,7 @@ function sendError(res, statusCode, message) {
  */
 function validateTimes(res, startTime, endTime) {
   if (typeof startTime !== "string" || typeof endTime !== "string") {
-    sendError(res, 400, "startTime ja endTime pitää olla ISO 8601 -merkkijonoja.");
+    sendError(res, 400, "startTime ja endTime pitää olla ISO 8601 -merkkijonoja. YYYY-MM-DDTHH:mm:ssZ tai YYYY-MM-DDTHH:mm:ss.sssZ");
     return null;
   }
 
@@ -37,7 +37,7 @@ function validateTimes(res, startTime, endTime) {
     /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?Z$/;
 
   if (!iso8601Regex.test(startTime) || !iso8601Regex.test(endTime)) {
-    sendError(res, 400, "Aikamuoto virheellinen. Käytä ISO 8601 -muotoa.");
+    sendError(res, 400, "Aikamuoto virheellinen. Käytä ISO 8601 -muotoa. YYYY-MM-DDTHH:mm:ssZ tai YYYY-MM-DDTHH:mm:ss.sssZ");
     return null;
   }
 
@@ -45,7 +45,7 @@ function validateTimes(res, startTime, endTime) {
   const endDate = new Date(endTime);
 
   if (Number.isNaN(startDate.getTime()) || Number.isNaN(endDate.getTime())) {
-    sendError(res, 400, "Aikamuoto virheellinen. Käytä ISO 8601 -muotoa.");
+    sendError(res, 400, "Aikamuoto virheellinen. Käytä ISO 8601 -muotoa. YYYY-MM-DDTHH:mm:ssZ tai YYYY-MM-DDTHH:mm:ss.sssZ");
     return null;
   }
 
