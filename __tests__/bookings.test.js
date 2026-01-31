@@ -45,6 +45,19 @@ describe("Meeting room Booking API (/bookings)", () => {
       expect(res.body).toEqual({ error: expect.any(String) });
     });
 
+    test("400: rejects booking that is in the past", async () => {
+    const app = loadFreshApp();
+
+    const res = await request(app).post("/bookings").send({
+      roomId: "huone1",
+      startTime: "2000-01-01T10:00:00Z",
+      endTime: "2000-01-01T11:00:00Z",
+    });
+
+    expect(res.status).toBe(400);
+    expect(res.body).toEqual({ error: expect.any(String) });
+    });
+
     test("409: rejects overlapping booking in same room", async () => {
       const app = loadFreshApp();
 
