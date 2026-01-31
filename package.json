@@ -5,7 +5,8 @@
   "scripts": {
     "test": "jest",
     "start": "node src/server.js",
-    "dev": "node src/server.js"
+    "dev": "node src/server.js",
+    "cli": "node scripts/cli.js"
   },
   "keywords": [],
   "author": "",
