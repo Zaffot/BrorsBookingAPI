@@ -7,8 +7,9 @@ function loadFreshApp() {
   return require("../src/app");
 }
 
-function futureISO(minutesFromNow) {
-  return new Date(Date.now() + minutesFromNow * 60 * 1000).toISOString();
+function futureISO(offsetMinutes) {
+  const base = Date.parse("2099-01-01T00:00:00.000Z");
+  return new Date(base + offsetMinutes * 60 * 1000).toISOString();
 }
 
 describe("Meeting room Booking API (/bookings)", () => {
